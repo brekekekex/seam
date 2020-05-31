@@ -1,4 +1,4 @@
 *.png
 lodepng.c
 lodepng.h
-
+seam
