@@ -104,4 +104,10 @@ As of now, *Seam* will attempt to produce animated GIFS from any intermediate fi
 
 (Source: Grant Wood, [*American Gothic*](https://en.wikipedia.org/wiki/American_Gothic#/media/File:Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg)) 
 
+<div>
+<p align="center">
+  <img src="https://github.com/brekekekex/seam/blob/master/gallery/editor2.gif" width="600" />
+</p>
+</div>
 
+(Source: Charles C. Ebbets, [*Lunch atop a Skyscraper*](https://en.wikipedia.org/wiki/Lunch_atop_a_Skyscraper#/media/File:Lunch_atop_a_Skyscraper.jpg)) 
