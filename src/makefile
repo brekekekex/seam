@@ -3,3 +3,5 @@ default:
 
 clean:
 	rm seam
+	rm *.png
+	rm *.gif
