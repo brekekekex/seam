@@ -12,7 +12,7 @@
 
 Per iteration, *Seam* computes a discrete gradient through convolution with a [Sobel kernel](https://en.wikipedia.org/wiki/Sobel_operator), which is then used to compute an accumulative cost matrix *M* (as in dynamic programming). The optimal solution is then back-traced through *M* to yield a seam of pixels which may be deleted from *I* to produce an image one column (or row) smaller than *I*.      
 
-The result is a resizing operation that may be less destructive of source features than linear or cubic interpolation:
+The result is a resizing operation that *may* be less destructive of source features than linear or cubic interpolation:
 
 <div>
   <p float="left">
@@ -31,6 +31,23 @@ The result is a resizing operation that may be less destructive of source featur
 </div>
 
 (Left: Result of linear interpolation. Right: Result of seam carving (note the aberration around Mt. Fuji). Source: Hokusai, [*The Great Wave off Kanagawa*](https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa#/media/File:Tsunami_by_hokusai_19th_century.jpg)) 
+
+<div>
+  <p float="left">
+    <img src="https://github.com/brekekekex/seam/blob/master/gallery/last_supper_seam_compressed.gif" width="400" />
+    <img src="https://github.com/brekekekex/seam/blob/master/gallery/last_supper_energy_compressed.gif" width="400" /> 
+  </p>
+</div>
+
+<div>
+  <p float="left">
+    <img src="https://github.com/brekekekex/seam/blob/master/gallery/last_supper_linear.png" width="400" />
+    <img src="https://github.com/brekekekex/seam/blob/master/gallery/last_supper_sc.png" width="400" /> 
+  </p>
+</div>
+
+(Left: Result of linear interpolation. Right: Result of seam carving. Source: Leonardo da Vinci, [*The Last Supper*](https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)#/media/File:The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg)) 
+
 
 <div>
 <p float="left">
