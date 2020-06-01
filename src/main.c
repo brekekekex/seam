@@ -7,6 +7,8 @@
 #include "seam_carver.h"
 #include "effects.h"
 
+#define ANIMATION 1
+
 enum KeyPressSurfaces
 {
     KEY_PRESS_SURFACE_DEFAULT,
@@ -91,8 +93,12 @@ char he[] = "height:";
 char bu[] = "(busy...)";
 char id[] = "(idle)";
 char qu[] = "(quitting...)";
+char frr[] = "raw";
+char fre[] = "energy";
+char frs[] = "seam";
 
 char ti[50];
+char fna[20];
 
 int main(int argc, char *argv[])
 {
@@ -217,6 +223,9 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    int init_width = width;
+    int init_height = height;
+
     char *sta = id;
     char *mostr = in;
 
@@ -288,6 +297,8 @@ int main(int argc, char *argv[])
 
     char *vistr;
     vistr = so;
+
+    int frame_num = 0;
     
     while(quit == 0) {
         while (SDL_PollEvent(&e) != 0) {
@@ -373,6 +384,21 @@ carve_horizontal:       ;unsigned char *new_working_copy = execute_carve_horizon
                         vertical_seam(width, height, seam_copy, targets_vertical);
                         // update seam_view
                         seam_view = SDL_CreateRGBSurfaceWithFormatFrom(seam_copy, width, height, 32, 4 * width, SDL_PIXELFORMAT_RGBA32);
+                        
+                        if (rrflag) {
+                            sprintf(fna, "%s_%05d.png", frr, frame_num);
+                            lodepng_encode32_file(fna, working_copy, width, height);
+                        }
+                        if (reflag) {
+                            sprintf(fna, "%s_%05d.png", fre, frame_num);
+                            lodepng_encode32_file(fna, heatmap_copy, width, height);
+                        }
+                        if (rsflag) {
+                            sprintf(fna, "%s_%05d.png", frs, frame_num);
+                            lodepng_encode32_file(fna, seam_copy, width, height);
+                        }
+                        frame_num++;
+
                         break;
                     }
                     case SDLK_LEFT: {
@@ -414,6 +440,19 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
                         vertical_seam(width, height, seam_copy, targets_vertical);
                         // update seam_view
                         seam_view = SDL_CreateRGBSurfaceWithFormatFrom(seam_copy, width, height, 32, 4 * width, SDL_PIXELFORMAT_RGBA32);
+                        if (rrflag) {
+                            sprintf(fna, "%s_%05d.png", frr, frame_num);
+                            lodepng_encode32_file(fna, working_copy, width, height);
+                        }
+                        if (reflag) {
+                            sprintf(fna, "%s_%05d.png", fre, frame_num);
+                            lodepng_encode32_file(fna, heatmap_copy, width, height);
+                        }
+                        if (rsflag) {
+                            sprintf(fna, "%s_%05d.png", frs, frame_num);
+                            lodepng_encode32_file(fna, seam_copy, width, height);
+                        }
+                        frame_num++;
                         break;
                     }
                 }
@@ -458,7 +497,7 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
             sta = id;
         }
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // clean up
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -476,6 +515,41 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
     SDL_DestroyWindow(window);
     window = NULL;
     SDL_Quit();
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // handle records
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    char rsz[100];
+    sprintf(rsz, "mogrify -resize %dx%d -background black -gravity NorthWest -extent %dx%d *.png", init_width, init_height, init_width, init_height);
+
+    char rranim[100];
+    sprintf(rranim, "convert -delay 10 -loop 0 raw*.png raw.gif");
+
+    char reanim[100];
+    sprintf(reanim, "convert -delay 10 -loop 0 energy*.png energy.gif");
+
+    char rsanim[100];
+    sprintf(rsanim, "convert -delay 10 -loop 0 seam*.png seam.gif");
+
+
+    if ((rrflag || reflag || rsflag) && ANIMATION) {
+        printf("resizing...\n");
+        system(rsz);
+        if (rrflag) {
+            printf("animating raw...\n");
+            system(rranim);
+        }
+        if (reflag) {
+            printf("animating energy...\n");
+            system(reanim);
+        }
+        if (rsflag) {
+            printf("animating seams...\n");
+            system(rsanim);
+        }
+    }
     
     return 0;
 }
