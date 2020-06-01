@@ -69,11 +69,16 @@ void help_handler(char *argv0)
     "\t-rs: dump intermediate seams to disk\n"
     "\t-tw TARGET_WIDTH: resize image width to TARGET_WIDTH\n"
     "\t-th TARGET_HEIGHT: resize image height to TARGET_HEIGHT\n"
-    "Seam-carve a PNG image.\n"
+    "\tomit -tw and -th flags to enter interactive mode\n"
+    "\nSeam-carve a PNG image.\n"
     "%s implements Rubinstein, Avidan, and Shamir's forward-energy-based content resizing algorithm.\n"
     "Note that FILENAME must be a PNG. The [-tw TARGET_WIDTH] and [-th TARGET_HEIGHT] may be used\n"
-    "together or independently (in which case %s will maintain the source aspect ratio).\n"
-    "\nBy default, %s FILENAME (without target dimensions) launches the interactive editor.\n", argv0, argv0, argv0);   
+    "together or independently (in the latter case %s will maintain the source aspect ratio).\n"
+    "\nBy default, %s FILENAME (without target dimensions) launches the editor in interactive mode.\n"
+    "\n\tEXIT the editor with Q or ESC.\n"
+    "\tSAVE the current VIEW with W.\n"
+    "\tToggle SEAMS with S.\n"
+    "\tToggle HEATMAP with H.\n", argv0, argv0, argv0);   
 }
 
 void syntax_err_handler(char *argv0)
