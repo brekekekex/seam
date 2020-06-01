@@ -91,7 +91,7 @@ By default,  FILENAME (without target dimensions) launches the editor in interac
         Toggle HEATMAP with H.
 ```
 
-As of now, *Seam* will attempt to produce animated GIFS from any intermediate files written by the *-rr*, *-re*, and *-rs* flags through a *system* call for [ImageMagick](https://imagemagick.org/index.php). This behavior (which can be quite slow) may be turned off by reflagging *#define ANIMATION 1* to *#define ANIMATION 0*.
+As of now, *Seam* will attempt to produce animated GIFS from any intermediate files written by the *-rr*, *-re*, and *-rs* flags through a *system()* call for [ImageMagick](https://imagemagick.org/index.php). This behavior (which can be quite slow) may be turned off by reflagging *#define ANIMATION 1* to *#define ANIMATION 0*.
 
 
 ## Gallery
