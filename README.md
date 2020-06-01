@@ -48,6 +48,31 @@ The result is a resizing operation that *may* be less destructive of source feat
 
 (Left: Result of linear interpolation. Right: Result of seam carving (note that the head of Jesus is protected by a high energy region). Source: Leonardo da Vinci, [*The Last Supper*](https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)#/media/File:The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg)) 
 
+## Installation & Usage
+Download *Seam* by running 
+```linux
+git clone https://github.com/brekekekex/seam.git
+```
+Note that building *Seam* requires SDL2, which may be obtained through
+```linux
+sudo apt-get install libsdl2-dev
+```
+In addition, one should *git clone* [LodePNG](https://github.com/lvandeve/lodepng) into the */src* directory and rename *lodepng.cpp* to *lodepng.c*.
+
+One may now build the binary with
+```linux
+make
+```
+
+For usage instructions, run 
+```linux
+./seam --help 
+```
+which should produce
+
+
+
+
 ## Gallery
 <div>
 <p float="left">
