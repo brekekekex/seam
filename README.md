@@ -46,7 +46,7 @@ The result is a resizing operation that *may* be less destructive of source feat
   </p>
 </div>
 
-(Left: Result of linear interpolation. Right: Result of seam carving. Source: Leonardo da Vinci, [*The Last Supper*](https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)#/media/File:The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg)) 
+(Left: Result of linear interpolation. Right: Result of seam carving (note that the figure of Jesus is protected by a high energy region). Source: Leonardo da Vinci, [*The Last Supper*](https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)#/media/File:The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg)) 
 
 
 <div>
