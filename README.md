@@ -21,7 +21,16 @@ The result is a resizing operation that may be less destructive of source featur
   </p>
 </div>
 
-(left: Seam carving animation generated with the *-rs* flag)
+(Left: Seam carving animation generated with the *-rs* flag. Right: Corresponding heatmap animation generated with the *-re* flag.)
+
+<div>
+  <p float="left">
+    <img src="https://github.com/brekekekex/seam/blob/master/gallery/kanagawa_linear.png" width="400" />
+    <img src="https://github.com/brekekekex/seam/blob/master/gallery/kanagawa_sc.png" width="400" /> 
+  </p>
+</div>
+
+(Left: Result of linear interpolation. Right: Result of seam carving (note the aberration around Mt. Fuji). Source: Hokusai, [*The Great Wave off Kanagawa*](https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa#/media/File:Tsunami_by_hokusai_19th_century.jpg)) 
 
 <div>
 <p float="left">
