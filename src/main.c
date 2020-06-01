@@ -7,7 +7,6 @@
 #include "seam_carver.h"
 #include "effects.h"
 
-
 enum KeyPressSurfaces
 {
     KEY_PRESS_SURFACE_DEFAULT,
@@ -80,21 +79,16 @@ void syntax_err_handler(char *argv0)
     printf("%s: syntax error\nTry '%s --help' for more information.\n", argv0, argv0);
 }
 
-char *window_title_handler(unsigned int width, unsigned int height, unsigned int mode, unsigned int view, char *argv0)
-{
-    char m[] = "\tmode: ";
-    char v[] = "\tview: ";
-    char inter[] = "interactive";
-    char targeting[] = "auto-resizing";
-    char w[] = "\twidth: ";
-    char h[] = "\theight: ";
-
-    char wid_buff[7];
-    char hei_buff[7];
-
-    
-}
-
+char mo[] = "mode:";
+char in[] = "interactive";
+char au[] = "auto";
+char vi[] = "view:";
+char hm[] = "heatmap";
+char se[] = "seams";
+char so[] = "source";
+char wi[] = "width:";
+char he[] = "height:";
+char ti[30];
 
 int main(int argc, char *argv[])
 {
@@ -193,7 +187,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // set up SDL context
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +213,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    char *mostr = in;
+
     if (twflag || thflag) {
+        mostr = au;
         if (tw >= width) {
             printf("Invalid TARGET_WIDTH.\n");
             return 1;
@@ -282,8 +278,11 @@ int main(int argc, char *argv[])
     seam_view = SDL_CreateRGBSurfaceWithFormatFrom(seam_copy, width, height, 32, 4 * width, SDL_PIXELFORMAT_RGBA32);
     
     int quit = 0;
-    int view = 0;
+    int view = 2;
 
+    char *vistr;
+    vistr = so;
+    
     while(quit == 0) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
@@ -417,14 +416,21 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
         SDL_BlitSurface(black, NULL, window_screen, NULL); 
         if (view == 1) {
             SDL_BlitSurface(heatmap_view, NULL, window_screen, NULL); 
+            vistr = hm;
         } else if (view == 2) {
             SDL_BlitSurface(seam_view, NULL, window_screen, NULL);  
+            vistr = se;
         } else {
             SDL_BlitSurface(workbench, NULL, window_screen, NULL);
+            vistr = so;
         }
-        char *title = window_title_handler(width, height, 0, 0, argv[0]);
-        SDL_SetWindowTitle(window, argv[0]);
+
+        sprintf(ti, "%s\t%s %s\t%s %s\t%s %d\t%s %d", argv[0], mo, mostr, vi, vistr, wi, width, he, height);
+        SDL_SetWindowTitle(window, ti);
         SDL_UpdateWindowSurface(window);
+        
+        // handle auto resize
+
         if (twflag || thflag) {
             if (width != tw && height != th) {
                 float actual_ratio = (float)width / (float)height;
@@ -436,14 +442,13 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
             }
             if (width != tw) {
                 goto carve_vertical;
-            } if (height != th) {
+            } 
+            if (height != th) {
                 goto carve_horizontal;
             }
-            SDL_BlitSurface(workbench, NULL, window_screen, NULL);
-            SDL_SetWindowTitle(window, argv[0]);
-            SDL_UpdateWindowSurface(window);
-            SDL_Delay(3000);
-            quit = !quit;
+            twflag = thflag = 0;
+            iflag = 1;
+            mostr = in;
         }
     }
     
