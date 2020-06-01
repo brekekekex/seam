@@ -88,7 +88,10 @@ char se[] = "seams";
 char so[] = "source";
 char wi[] = "width:";
 char he[] = "height:";
-char ti[30];
+char bu[] = "(busy...)";
+char id[] = "(idle)";
+
+char ti[50];
 
 int main(int argc, char *argv[])
 {
@@ -213,10 +216,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    char *sta = id;
     char *mostr = in;
 
     if (twflag || thflag) {
         mostr = au;
+        sta = bu;
         if (tw >= width) {
             printf("Invalid TARGET_WIDTH.\n");
             return 1;
@@ -425,11 +430,11 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
             vistr = so;
         }
 
-        sprintf(ti, "%s\t%s %s\t%s %s\t%s %d\t%s %d", argv[0], mo, mostr, vi, vistr, wi, width, he, height);
+        sprintf(ti, "%s %s\t%s %s\t%s %s\t%s %d\t%s %d", argv[0], sta, mo, mostr, vi, vistr, wi, width, he, height);
         SDL_SetWindowTitle(window, ti);
         SDL_UpdateWindowSurface(window);
         
-        // handle auto resize
+        // handle auto resize (this is terrible but okay for now)
 
         if (twflag || thflag) {
             if (width != tw && height != th) {
@@ -449,6 +454,7 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
             twflag = thflag = 0;
             iflag = 1;
             mostr = in;
+            sta = id;
         }
     }
     
@@ -469,7 +475,6 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
     SDL_DestroyWindow(window);
     window = NULL;
     SDL_Quit();
-    
     
     return 0;
 }
