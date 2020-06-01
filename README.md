@@ -55,4 +55,7 @@ The result is a resizing operation that *may* be less destructive of source feat
   <img src="https://github.com/brekekekex/seam/blob/master/gallery/american_gothic_energy_compressed.gif" width="400" /> 
 </p>
 </div>
+
 (Source: Grant Wood, [*American Gothic*](https://en.wikipedia.org/wiki/American_Gothic#/media/File:Grant_Wood_-_American_Gothic_-_Google_Art_Project.jpg)) 
+
+
