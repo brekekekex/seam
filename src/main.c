@@ -90,6 +90,7 @@ char wi[] = "width:";
 char he[] = "height:";
 char bu[] = "(busy...)";
 char id[] = "(idle)";
+char qu[] = "(quitting...)";
 
 char ti[50];
 
@@ -222,14 +223,14 @@ int main(int argc, char *argv[])
     if (twflag || thflag) {
         mostr = au;
         sta = bu;
-        if (tw >= width) {
+        if (tw > width) {
             printf("Invalid TARGET_WIDTH.\n");
             return 1;
         }
-        if (th >= height) {
+        if (th > height) {
             printf("Invalid TARGET_HEIGHT.\n");
             return 1;
-        }
+        } 
         if (twflag && !thflag) {
             th = (tw * height) / width;
         }
@@ -295,13 +296,13 @@ int main(int argc, char *argv[])
             } else if ((e.type == SDL_KEYDOWN && iflag)) {
                 switch (e.key.keysym.sym) {
                     case SDLK_ESCAPE: {
-                        printf("Quitting\n");
                         quit = !quit;
+                        sta = qu;
                         break;
                     }
                     case SDLK_q: {
-                        printf("Quitting\n");
                         quit = !quit;
+                        sta = qu;
                         break;
                     }
                     case SDLK_w: {
@@ -430,7 +431,7 @@ carve_vertical:         ;unsigned char *new_working_copy = execute_carve_vertica
             vistr = so;
         }
 
-        sprintf(ti, "%s %s\t%s %s\t%s %s\t%s %d\t%s %d", argv[0], sta, mo, mostr, vi, vistr, wi, width, he, height);
+        sprintf(ti, "%s %s\t|\t%s %s\t|\t%s %s\t|\t%s %d %s %d", argv[0], sta, mo, mostr, vi, vistr, wi, width, he, height);
         SDL_SetWindowTitle(window, ti);
         SDL_UpdateWindowSurface(window);
         
