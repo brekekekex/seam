@@ -23,6 +23,9 @@ void heatmap(unsigned int width, unsigned int height, char *target, float *heat)
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
+
+            // credit to John1024 @https://stackoverflow.com/questions/20792445/calculate-rgb-value-for-a-range-of-values-to-create-heat-map
+
             rt = 2. * ((heat[i + (j * width)] - min) / (max - min));
             b = (0 >= 255 * (1. - rt)) ? 0 : (char)(255 * (1. - rt));
             r = (0 >= 255 * (rt - 1.)) ? 0 : (char)(255 * (rt - 1.));
