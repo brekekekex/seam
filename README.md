@@ -69,7 +69,27 @@ For usage instructions, run
 ./seam --help 
 ```
 which should produce
+```linux
+usage: ./seam FILENAME [-rr] [-re] [-rs] [-tw TARGET_WIDTH] [-th TARGET_HEIGHT]
+        -rr: dump intermediate images to disk
+        -re: dump intermediate energy maps to disk
+        -rs: dump intermediate seams to disk
+        -tw TARGET_WIDTH: resize image width to TARGET_WIDTH
+        -th TARGET_HEIGHT: resize image height to TARGET_HEIGHT
+        omit -tw and -th flags to enter interactive mode
 
+Seam-carve a PNG image.
+./seam implements Rubinstein, Avidan, and Shamir's forward-energy-based content resizing algorithm.
+Note that FILENAME must be a PNG. The [-tw TARGET_WIDTH] and [-th TARGET_HEIGHT] may be used
+together or independently (in which case ./seam will maintain the source aspect ratio).
+
+By default,  FILENAME (without target dimensions) launches the editor in interactive mode.
+
+        EXIT the editor with Q or ESC.
+        SAVE the current VIEW with W.
+        Toggle SEAMS with S.
+        Toggle HEATMAP with H.
+```
 
 
 
